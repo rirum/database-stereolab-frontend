@@ -1,4 +1,7 @@
-import styled from 'styled-components'
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+
 
 export default function Home() {
     return (
@@ -10,6 +13,10 @@ export default function Home() {
                 <Headline>
                     <h1>Stereolab</h1>
                 </Headline>
+                <Menu>
+                <Link to="/login" style={{textDecoration:'none'}}><p>Login</p></Link>
+                <Link to="/contato" style={{textDecoration:'none'}}><p>Contate-nos</p></Link>
+                </Menu>
             </LandingPage>
         </>
     )
@@ -41,4 +48,15 @@ const Headline = styled.div`
         font-size: 300px;
         color: #c84b31;
     }
+`
+const Menu = styled.div`
+    height: 60px;
+    width: 1025px;
+    display: flex;
+    justify-content: space-between;
+     p {
+        color: #ecdbba;
+        font-size: 50px;
+    }
+
 `

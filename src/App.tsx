@@ -1,13 +1,29 @@
 import styled from 'styled-components'
 import Home from './pages/Home'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Login from './pages/Login'
+import Contato from './pages/Contato'
+import Cadastro from './pages/Cadastro'
+
 
 function App() {
     return (
-        <>
-            <ContainerApp>
-                <Home />
-            </ContainerApp>
-        </>
+        
+        <BrowserRouter>
+        <ContainerApp>
+        <Routes>
+            <Route path='/' element={<Home />}/>
+            <Route path='/login' element={<Login />}/>
+            <Route path='/contato' element={<Contato />}/>
+            <Route path='/cadastro' element={<Cadastro />}/>
+           
+            
+                
+        </Routes>
+        </ContainerApp>
+            
+            </BrowserRouter>
+        
     )
 }
 
