@@ -4,12 +4,28 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './pages/Login'
 import Contato from './pages/Contato'
 import Cadastro from './pages/Cadastro'
-import { ToastContainer } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
+import UserContext from './context/UserContext'
+import { useState } from 'react'
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+    const [userLogged, setUserLogged] = useState(null);
     return (
         <>
-        <ToastContainer/>
+        <ToastContainer 
+        position="top-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        />
+        <UserContext.Provider value={{setUserLogged}}>
         <BrowserRouter>
         <ContainerApp>
         <Routes>
@@ -21,9 +37,11 @@ function App() {
             
                 
         </Routes>
+        
         </ContainerApp>
             
             </BrowserRouter>
+            </UserContext.Provider>
         
             </>
     )

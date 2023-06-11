@@ -1,27 +1,41 @@
 import Logo from '../components/Logo'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom'
+import { useContext, useState } from 'react';
+import { signIn } from '../services/authApi';
+import UserContext from '../context/UserContext';
+import { toast } from 'react-toastify';
 
 export default function Login() {
 const [email,setEmail] = useState('');
 const [password, setPassword]= useState('');
+const {setUserLogged} = useContext(UserContext);
+const navigate = useNavigate();
 
-// async function submit(event){
-//     event.preventDefault();
-//     try{
 
-//     }catch(error){
-        
-//     }
-// }
+async function submit(event:any){
+    event.preventDefault();
+  
+
+    try{
+        const userData = await signIn(email, password);
+        console.log(userData);
+        setUserLogged(userData);
+        toast('Login realizado com sucesso');
+        navigate('/contato')  
+
+    }catch(error){
+       
+        if(error){toast('Não foi possivel fazer o login')}
+    }
+}
 
 
     return (
         <>
             <Logo />
             <ContainerForm>
-                <form>
+                <form onSubmit={submit}>
                     <input placeholder="e-mail" type="email" required onChange={(e) => setEmail(e.target.value)}/>
                     <input placeholder="senha" type="password" required onChange={(e) => setPassword(e.target.value)}/>
                     <button>Login</button>
