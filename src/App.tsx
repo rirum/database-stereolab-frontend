@@ -4,11 +4,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './pages/Login'
 import Contato from './pages/Contato'
 import Cadastro from './pages/Cadastro'
-
+import { ToastContainer } from 'react-toastify'
 
 function App() {
     return (
-        
+        <>
+        <ToastContainer/>
         <BrowserRouter>
         <ContainerApp>
         <Routes>
@@ -24,6 +25,7 @@ function App() {
             
             </BrowserRouter>
         
+            </>
     )
 }
 

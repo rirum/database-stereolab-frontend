@@ -1,15 +1,29 @@
 import Logo from '../components/Logo'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { useState } from 'react';
 
 export default function Login() {
+const [email,setEmail] = useState('');
+const [password, setPassword]= useState('');
+
+// async function submit(event){
+//     event.preventDefault();
+//     try{
+
+//     }catch(error){
+        
+//     }
+// }
+
+
     return (
         <>
             <Logo />
             <ContainerForm>
                 <form>
-                    <input placeholder="e-mail" type="email" required />
-                    <input placeholder="senha" type="password" required />
+                    <input placeholder="e-mail" type="email" required onChange={(e) => setEmail(e.target.value)}/>
+                    <input placeholder="senha" type="password" required onChange={(e) => setPassword(e.target.value)}/>
                     <button>Login</button>
                 </form>
                 <ContainerLink>
