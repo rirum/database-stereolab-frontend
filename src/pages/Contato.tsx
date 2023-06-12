@@ -1,21 +1,51 @@
 import styled from 'styled-components'
 import Logo from '../components/Logo'
 import Menu from '../components/Menu'
-import { Link } from 'react-router-dom';
-import { MdOutlineEmail } from "react-icons/md";
-import { FaInstagram, FaTiktok, FaYoutube } from "react-icons/fa";
+import { Link } from 'react-router-dom'
+import { MdOutlineEmail } from 'react-icons/md'
+import { FaInstagram, FaTiktok, FaYoutube } from 'react-icons/fa'
 
 export default function Contato() {
     return (
         <>
             <Logo />
-            
+
             <WrapperSocial>
-            <WrapperIcon><StyledMail/> <SocialLink to="#"><p>E-mail</p></SocialLink></WrapperIcon>
-            <WrapperIcon><StyledInstagram/><SocialLink to="#"><p>Instagram</p></SocialLink></WrapperIcon>
-            <WrapperIcon><StyledTikTok/><SocialLink to="#"><p>TikTok</p></SocialLink></WrapperIcon>
-            <WrapperIcon><StyledYoutube/><SocialLink to="#"><p>Youtube</p></SocialLink></WrapperIcon>
-           
+                <WrapperIcon>
+                    <SocialLink to="mailto:contato@deaaz.net">
+                        <StyledMail /> <p>E-mail</p>
+                    </SocialLink>
+                </WrapperIcon>
+                <WrapperIcon>
+                    <SocialLink
+                        to="https://www.instagram.com/stereolab_oficial/"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        <StyledInstagram />
+                        <p>Instagram</p>
+                    </SocialLink>
+                </WrapperIcon>
+                <WrapperIcon>
+                    <SocialLink
+                        to="https://www.tiktok.com/stereolab_oficial"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        <StyledTikTok />
+                        <p>TikTok</p>
+                    </SocialLink>
+                </WrapperIcon>
+                <WrapperIcon>
+                    <SocialLink
+                        to="https://www.youtube.com/channel/UCWSXEV3feso16JLJwPb_XmA"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        <StyledYoutube />
+                        <p>Youtube</p>
+                    </SocialLink>
+                </WrapperIcon>
             </WrapperSocial>
             <Menu />
         </>
@@ -33,11 +63,13 @@ const WrapperSocial = styled.div`
 const WrapperIcon = styled.div`
     display: flex;
     flex-direction: column;
-    margin-bottom:15px;
+    margin-bottom: 15px;
+    justify-content: center;
     align-items: center;
-    p{
+
+    p {
         font-family: 'Bebas Neue', sans-serif;
-        color: #ECDBBA;
+        color: #ecdbba;
         font-size: 30px;
         margin-top: 20px;
     }
@@ -47,20 +79,18 @@ const SocialLink = styled(Link)`
 `
 const StyledMail = styled(MdOutlineEmail)`
     font-size: 4.5rem;
-    color: #C84B31;
+    color: #c84b31;
 `
 const StyledInstagram = styled(FaInstagram)`
     font-size: 4.5rem;
-    color: #C84B31;
+    color: #c84b31;
 `
 const StyledTikTok = styled(FaTiktok)`
     font-size: 4.5rem;
-    color: #C84B31;
+    color: #c84b31;
 `
 
 const StyledYoutube = styled(FaYoutube)`
     font-size: 4.5rem;
-    color: #C84B31;
+    color: #c84b31;
 `
-
-
