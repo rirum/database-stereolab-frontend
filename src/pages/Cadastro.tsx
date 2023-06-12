@@ -1,22 +1,67 @@
 import Logo from '../components/Logo'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { signUp } from '../services/signUpApi'
 
 export default function Cadastro() {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [repeatPassword, setRepeatPassword] = useState('')
+    const [name, setName] = useState('')
+    const navigate = useNavigate()
+
+    async function submit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+
+        if (password !== repeatPassword) {
+            toast('As senhas não coincidem, por favor digite novamente')
+            return
+        }
+
+        try {
+            const signUpData = await signUp(name, email, password)
+            toast('Cadastro realizado com sucesso')
+            navigate('/login')
+        } catch (error) {
+            if (error) {
+                toast('Tente novamente mais tarde')
+            }
+        }
+    }
+
     return (
         <>
             <Logo />
             <ContainerForm>
-                <form>
-                    <input placeholder="nome" type="name" required />
-                    <input placeholder="e-mail" type="email" required />
-                    <input placeholder="senha" type="password" required />
+                <form onSubmit={submit}>
+                    <input
+                        placeholder="nome"
+                        type="name"
+                        required
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                    <input
+                        placeholder="e-mail"
+                        type="email"
+                        required
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <input
+                        placeholder="senha"
+                        type="password"
+                        required
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
                     <input
                         placeholder="repita sua senha"
                         type="password"
                         required
+                        onChange={(e) => setRepeatPassword(e.target.value)}
                     />
-                    <button>Cadastre-se</button>
+                    <button type="submit">Cadastre-se</button>
                 </form>
                 <ContainerLink>
                     <Link to="/login" style={{ textDecoration: 'none' }}>
