@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './pages/Login'
 import Contato from './pages/Contato'
 import Cadastro from './pages/Cadastro'
+import Database from './pages/Database'
 import { ToastContainer, toast } from 'react-toastify'
 import UserContext from './context/UserContext'
 import { useState } from 'react'
@@ -33,7 +34,7 @@ function App() {
             <Route path='/login' element={<Login />}/>
             <Route path='/contato' element={<Contato />}/>
             <Route path='/cadastro' element={<Cadastro />}/>
-           
+            <Route path='/database' element={<Database />}/>
             
                 
         </Routes>
