@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Logo from "../components/Logo";
 import Menu from "../components/Menu";
 import{HiSparkles, HiOutlineInboxIn} from 'react-icons/hi';
-import {BsFillCarFrontFill} from 'react-icons/bs' 
+import {BsFillCarFrontFill, BsFillBagPlusFill} from 'react-icons/bs' 
 export default function Database(){
     return(
         <>
@@ -11,11 +11,20 @@ export default function Database(){
         <WrapperDatabase>
         <WrapperIcon>
             <StyledCar/>
-            <p>Veículos</p></WrapperIcon>
-        <WrapperIcon><StyledProduct/>
-        <p>Produtos</p></WrapperIcon>
-        <WrapperIcon><StyledAcc/>
-        <p>Universais</p></WrapperIcon>
+            <p>Veículos</p>
+        </WrapperIcon>
+        <WrapperIcon>
+            <StyledCategories/>
+        <p>Categorias</p>
+        </WrapperIcon>
+        <WrapperIcon>
+            <StyledProduct/>
+        <p>Produtos</p>
+        </WrapperIcon>
+        <WrapperIcon>
+            <StyledAcc/>
+        <p>Universais</p>
+        </WrapperIcon>
         </WrapperDatabase>
         <Menu/>
         </>
@@ -56,7 +65,10 @@ const StyledCar = styled(BsFillCarFrontFill)`
     color: #c84b31;
     
 `
-
+const StyledCategories = styled(BsFillBagPlusFill)`
+    font-size: 3.5rem;
+    color: #c84b31;
+`
 const StyledProduct = styled(HiOutlineInboxIn)`
     font-size: 3.5rem;
     color: #c84b31;
