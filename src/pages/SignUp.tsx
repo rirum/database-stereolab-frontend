@@ -1,29 +1,33 @@
 import Logo from '../components/Logo'
 import styled from 'styled-components'
-import { Link, useNavigate } from 'react-router-dom'
-import { useContext, useState } from 'react'
-import { signIn } from '../services/authApi'
-import UserContext from '../context/UserContext'
+import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { signUp } from '../services/signUpApi'
 
-export default function Login() {
+export default function SignUp() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { setUserLogged } = useContext(UserContext)
+    const [repeatPassword, setRepeatPassword] = useState('')
+    const [name, setName] = useState('')
     const navigate = useNavigate()
 
-    async function submit(event: any) {
+    async function submit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
+        if (password !== repeatPassword) {
+            toast('As senhas não coincidem, por favor digite novamente')
+            return
+        }
+
         try {
-            const userData = await signIn(email, password)
-            console.log(userData)
-            setUserLogged(userData)
-            toast('Login realizado com sucesso')
-            navigate('/cadastro')
+            const signUpData = await signUp(name, email, password)
+            toast('Cadastro realizado com sucesso')
+            navigate('/login')
         } catch (error) {
             if (error) {
-                toast('Não foi possivel fazer o login')
+                toast('Tente novamente mais tarde')
             }
         }
     }
@@ -33,6 +37,12 @@ export default function Login() {
             <Logo />
             <ContainerForm>
                 <form onSubmit={submit}>
+                    <input
+                        placeholder="nome"
+                        type="name"
+                        required
+                        onChange={(e) => setName(e.target.value)}
+                    />
                     <input
                         placeholder="e-mail"
                         type="email"
@@ -45,11 +55,17 @@ export default function Login() {
                         required
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <button>Login</button>
+                    <input
+                        placeholder="repita sua senha"
+                        type="password"
+                        required
+                        onChange={(e) => setRepeatPassword(e.target.value)}
+                    />
+                    <button type="submit">Cadastre-se</button>
                 </form>
                 <ContainerLink>
-                    <Link to="/cadastro" style={{ textDecoration: 'none' }}>
-                        <p>Cadastre-se</p>
+                    <Link to="/login" style={{ textDecoration: 'none' }}>
+                        <p>Faça seu login</p>
                     </Link>
                 </ContainerLink>
             </ContainerForm>
@@ -61,6 +77,8 @@ const ContainerForm = styled.div`
     form {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     input {
         width: 300px;
@@ -70,10 +88,10 @@ const ContainerForm = styled.div`
         border: 1px solid #d9d9d9;
         ::placeholder {
             font-family: 'Bebas Neue', sans-serif;
+            margin-top: 10px;
             font-size: 18px;
             color: #bdbdc2;
             text-align: center;
-            padding: 10px;
         }
     }
     button {

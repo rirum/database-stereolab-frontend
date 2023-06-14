@@ -3,48 +3,48 @@ import Home from './pages/Home'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './pages/Login'
 import Contato from './pages/Contato'
+import SignUp from './pages/SignUp'
 import Cadastro from './pages/Cadastro'
-import Database from './pages/Database'
 import { ToastContainer, toast } from 'react-toastify'
 import UserContext from './context/UserContext'
 import { useState } from 'react'
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css'
+import CadastroCategorias from './pages/Cadastro-categorias'
 
 function App() {
-    const [userLogged, setUserLogged] = useState(null);
+    const [userLogged, setUserLogged] = useState(null)
     return (
         <>
-        <ToastContainer 
-        position="top-left"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-        />
-        <UserContext.Provider value={{setUserLogged}}>
-        <BrowserRouter>
-        <ContainerApp>
-        <Routes>
-            <Route path='/' element={<Home />}/>
-            <Route path='/login' element={<Login />}/>
-            <Route path='/contato' element={<Contato />}/>
-            <Route path='/cadastro' element={<Cadastro />}/>
-            <Route path='/database' element={<Database />}/>
-            
-                
-        </Routes>
-        
-        </ContainerApp>
-            
-            </BrowserRouter>
+            <ToastContainer
+                position="top-left"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
+            <UserContext.Provider value={{ setUserLogged }}>
+                <BrowserRouter>
+                    <ContainerApp>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/contato" element={<Contato />} />
+                            <Route path="/signup" element={<SignUp />} />
+                            <Route path="/cadastro" element={<Cadastro />} />
+                            <Route
+                                path="/cadastro-categorias"
+                                element={<CadastroCategorias />}
+                            />
+                        </Routes>
+                    </ContainerApp>
+                </BrowserRouter>
             </UserContext.Provider>
-        
-            </>
+        </>
     )
 }
 

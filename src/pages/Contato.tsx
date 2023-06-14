@@ -13,9 +13,13 @@ export default function Contato() {
             <WrapperSocial>
                 <WrapperIcon>
                     <SocialLink to="mailto:contato@deaaz.net">
-                        <StyledMail /> <p>E-mail</p>
+                        <StyledMail />
+                    </SocialLink>
+                    <SocialLink to="mailto:contato@deaaz.net">
+                        <p>E-mail</p>
                     </SocialLink>
                 </WrapperIcon>
+
                 <WrapperIcon>
                     <SocialLink
                         to="https://www.instagram.com/stereolab_oficial/"
@@ -23,9 +27,16 @@ export default function Contato() {
                         rel="noopener"
                     >
                         <StyledInstagram />
+                    </SocialLink>
+                    <SocialLink
+                        to="https://www.instagram.com/stereolab_oficial/"
+                        target="_blank"
+                        rel="noopener"
+                    >
                         <p>Instagram</p>
                     </SocialLink>
                 </WrapperIcon>
+
                 <WrapperIcon>
                     <SocialLink
                         to="https://www.tiktok.com/stereolab_oficial"
@@ -43,6 +54,12 @@ export default function Contato() {
                         rel="noopener"
                     >
                         <StyledYoutube />
+                    </SocialLink>
+                    <SocialLink
+                        to="https://www.youtube.com/channel/UCWSXEV3feso16JLJwPb_XmA"
+                        target="_blank"
+                        rel="noopener"
+                    >
                         <p>Youtube</p>
                     </SocialLink>
                 </WrapperIcon>
