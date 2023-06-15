@@ -62,4 +62,6 @@ const ContainerApp = styled.div`
     align-items: center;
     margin: 0px;
     padding: 0px;
+    font-family: 'Bebas Neue', sans-serif;
+    color: #ECDBBA;
 `
