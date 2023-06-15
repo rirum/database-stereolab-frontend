@@ -1,118 +1,92 @@
-import Logo from '../components/Logo'
 import styled from 'styled-components'
+import Logo from '../components/Logo'
+import Menu from '../components/Menu'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import { signUp } from '../services/signUpApi'
-
+import { HiSparkles, HiOutlineInboxIn } from 'react-icons/hi'
+import { BsFillCarFrontFill, BsFillBagPlusFill } from 'react-icons/bs'
 export default function Cadastro() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [repeatPassword, setRepeatPassword] = useState('')
-    const [name, setName] = useState('')
-    const navigate = useNavigate()
-
-    async function submit(event: React.FormEvent<HTMLFormElement>) {
-        event.preventDefault()
-
-        if (password !== repeatPassword) {
-            toast('As senhas não coincidem, por favor digite novamente')
-            return
-        }
-
-        try {
-            const signUpData = await signUp(name, email, password)
-            toast('Cadastro realizado com sucesso')
-            navigate('/login')
-        } catch (error) {
-            if (error) {
-                toast('Tente novamente mais tarde')
-            }
-        }
-    }
-
     return (
         <>
             <Logo />
-            <ContainerForm>
-                <form onSubmit={submit}>
-                    <input
-                        placeholder="nome"
-                        type="name"
-                        required
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                    <input
-                        placeholder="e-mail"
-                        type="email"
-                        required
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <input
-                        placeholder="senha"
-                        type="password"
-                        required
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <input
-                        placeholder="repita sua senha"
-                        type="password"
-                        required
-                        onChange={(e) => setRepeatPassword(e.target.value)}
-                    />
-                    <button type="submit">Cadastre-se</button>
-                </form>
-                <ContainerLink>
-                    <Link to="/login" style={{ textDecoration: 'none' }}>
-                        <p>Faça seu login</p>
-                    </Link>
-                </ContainerLink>
-            </ContainerForm>
+            <StyledHeader>
+                <h1>O que você vai cadastrar hoje?</h1>
+            </StyledHeader>
+            <WrapperDatabase>
+                <SocialLink to="/cadastro-veiculos">
+                    <WrapperIcon>
+                        <StyledCar />
+                        <p>Veículos</p>
+                    </WrapperIcon>
+                </SocialLink>
+
+                <SocialLink to="/cadastro-categorias">
+                    <WrapperIcon>
+                        <StyledCategories />
+                        <p>Categorias</p>
+                    </WrapperIcon>
+                </SocialLink>
+
+                <SocialLink to="/cadastro-produtos">
+                    <WrapperIcon>
+                        <StyledProduct />
+                        <p>Produtos</p>
+                    </WrapperIcon>
+                </SocialLink>
+
+                <SocialLink to="/cadastro-universais">
+                    <WrapperIcon>
+                        <StyledAcc />
+                        <p>Universais</p>
+                    </WrapperIcon>
+                </SocialLink>
+            </WrapperDatabase>
+            <Menu />
         </>
     )
 }
 
-const ContainerForm = styled.div`
-    form {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    input {
-        width: 300px;
-        height: 40px;
-        margin-bottom: 10px;
-        border-radius: 10px;
-        border: 1px solid #d9d9d9;
-        ::placeholder {
-            font-family: 'Bebas Neue', sans-serif;
-            margin-top: 10px;
-            font-size: 18px;
-            color: #bdbdc2;
-            text-align: center;
-        }
-    }
-    button {
-        width: 310px;
-        height: 50px;
-        margin-bottom: 10px;
-        border-radius: 10px;
-        border: 1px solid white;
-        background-color: #2c2e43;
-        box-shadow: none;
+const StyledHeader = styled.div`
+    h1 {
         font-family: 'Bebas Neue', sans-serif;
-        font-size: 30px;
-        color: white;
+        color: #ecdbba;
+        font-size: 50px;
     }
 `
-const ContainerLink = styled.div`
-    margin-top: 10px;
+const SocialLink = styled(Link)`
+    text-decoration: none;
+`
+
+const WrapperDatabase = styled.div`
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    margin-top: 60px;
+`
+const WrapperIcon = styled.div`
+    display: flex;
+    margin-bottom: 30px;
+
     p {
-        font-family: 'Poppins';
-        color: white;
-        font-size: 30px;
-        text-align: center;
+        font-family: 'Bebas Neue', sans-serif;
+        color: #ecdbba;
+        font-size: 40px;
+        margin-top: 10px;
+        margin-left: 20px;
     }
+`
+const StyledCar = styled(BsFillCarFrontFill)`
+    font-size: 3.5rem;
+    color: #c84b31;
+`
+const StyledCategories = styled(BsFillBagPlusFill)`
+    font-size: 3.5rem;
+    color: #c84b31;
+`
+const StyledProduct = styled(HiOutlineInboxIn)`
+    font-size: 3.5rem;
+    color: #c84b31;
+`
+const StyledAcc = styled(HiSparkles)`
+    font-size: 3.5rem;
+    color: #c84b31;
 `
