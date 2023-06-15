@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import Contato from './pages/Contato'
 import SignUp from './pages/SignUp'
 import Cadastro from './pages/Cadastro'
+import PageNotFound from './pages/PageNotFound'
 import { ToastContainer, toast } from 'react-toastify'
 import UserContext from './context/UserContext'
 import { useState } from 'react'
@@ -40,6 +41,7 @@ function App() {
                                 path="/cadastro-categorias"
                                 element={<CadastroCategorias />}
                             />
+                            <Route path='/*' element={<PageNotFound />} />
                         </Routes>
                     </ContainerApp>
                 </BrowserRouter>
