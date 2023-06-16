@@ -1,17 +1,38 @@
 import styled from 'styled-components'
 import Logo from '../components/Logo'
 import Menu from '../components/Menu'
+import { useState } from 'react'
+import { toast } from 'react-toastify'
+import { postCategory } from '../services/categoryApi'
 
 export default function CadastroCategorias() {
+    const [category, setCategory] = useState('')
+
+    async function submit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+
+        try {
+            const post = await postCategory(category)
+            console.log(post)
+            toast('Categoria cadastrada com sucesso!')
+        } catch (error) {
+            if (error) {
+                toast(
+                    'Não foi possível cadastrar a categoria, tente novamente mais tarde'
+                )
+            }
+        }
+    }
+
     return (
         <>
             <Logo />
             <Container>
-                <WrapperInput> 
+                <WrapperInput>
                     <StyledHeader>
                         <h1>Selecione a categoria.</h1>
                     </StyledHeader>
-                    
+
                     <StyledSelect>
                         <option value="" hidden></option>
                         <option value="teste"> teste</option>
@@ -22,20 +43,21 @@ export default function CadastroCategorias() {
                     </StyledSelect>
                 </WrapperInput>
 
-               <WrapperInput>
-                    <StyledHeader>  
+                <WrapperInput>
+                    <StyledHeader>
                         <h1>Ou cadastre a categoria do produto</h1>
-                        </StyledHeader>
-                        <ContainerForm>
-                            <form>
-                                <input placeholder='Categoria do Produto'></input>
-                                <button>Cadastrar</button>
-                            </form>
-                        </ContainerForm>
-                    
+                    </StyledHeader>
+                    <ContainerForm>
+                        <form onSubmit={submit}>
+                            <input
+                                placeholder="Categoria do Produto"
+                                required
+                                onChange={(e) => setCategory(e.target.value)}
+                            ></input>
+                            <button>Cadastrar</button>
+                        </form>
+                    </ContainerForm>
                 </WrapperInput>
-                
-          
             </Container>
             <Menu />
         </>
@@ -47,23 +69,21 @@ const Container = styled.div`
     height: 500px;
 `
 const WrapperInput = styled.div`
-   height: 200px;
-
+    height: 200px;
 `
 const StyledSelect = styled.select`
-   width:  200px;
-   height: 30px;
-   margin-top: 20px;
-   margin-bottom: 40px;
+    width: 200px;
+    height: 30px;
+    margin-top: 20px;
+    margin-bottom: 40px;
 `
 const StyledHeader = styled.div`
-  h1{
+    h1 {
         font-size: 40px;
     }
-
 `
 const ContainerForm = styled.div`
-margin-top: 20px;
+    margin-top: 20px;
     form {
         display: flex;
         flex-direction: row;
