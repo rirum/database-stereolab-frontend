@@ -11,6 +11,7 @@ import UserContext from './context/UserContext'
 import { useState } from 'react'
 import 'react-toastify/dist/ReactToastify.css'
 import CadastroCategorias from './pages/Cadastro-categorias'
+import CadastroProdutos from './pages/Cadastro-produtos'
 
 function App() {
     const [userLogged, setUserLogged] = useState(null)
@@ -41,7 +42,11 @@ function App() {
                                 path="/cadastro-categorias"
                                 element={<CadastroCategorias />}
                             />
-                            <Route path='/*' element={<PageNotFound />} />
+                            <Route
+                                path="/categoria/:id"
+                                element={<CadastroProdutos />}
+                            />
+                            <Route path="/*" element={<PageNotFound />} />
                         </Routes>
                     </ContainerApp>
                 </BrowserRouter>
@@ -63,5 +68,5 @@ const ContainerApp = styled.div`
     margin: 0px;
     padding: 0px;
     font-family: 'Bebas Neue', sans-serif;
-    color: #ECDBBA;
+    color: #ecdbba;
 `
