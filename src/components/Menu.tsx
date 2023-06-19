@@ -23,12 +23,18 @@ export default function Menu() {
                     Cadastro
                     {activeItem === 'database' && (
                         <OrderedListHidden>
-                            <NavbarLink to="/cadastro-database">
+                            <NavbarLink to="/cadastro-veiculos">
                                 Veículos
                             </NavbarLink>
-                            <NavbarLink to="/visualizar">Categorias</NavbarLink>
-                            <NavbarLink to="/visualizar">Produtos</NavbarLink>
-                            <NavbarLink to="/visualizar">Acessórios</NavbarLink>
+                            <NavbarLink to="/cadastro-categorias">
+                                Categorias
+                            </NavbarLink>
+                            <NavbarLink to="/cadastro-produtos">
+                                Produtos
+                            </NavbarLink>
+                            <NavbarLink to="/cadastro-acessorios">
+                                Acessórios
+                            </NavbarLink>
                         </OrderedListHidden>
                     )}
                 </MenuItem>

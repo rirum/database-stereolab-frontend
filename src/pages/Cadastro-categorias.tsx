@@ -1,26 +1,55 @@
 import styled from 'styled-components'
 import Logo from '../components/Logo'
 import Menu from '../components/Menu'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
-import { postCategory } from '../services/categoryApi'
+import { postCategory, getAllCategories } from '../services/categoryApi'
+import { useNavigate } from 'react-router-dom'
 
 export default function CadastroCategorias() {
     const [category, setCategory] = useState('')
+    const [listCategory, setListCategory] = useState<Category[]>([])
+    const navigate = useNavigate()
+    interface Category {
+        id: number
+        nome: string
+    }
+    useEffect(() => {
+        async function getCategory() {
+            try {
+                const response = await getAllCategories(category)
+                setListCategory(response)
+            } catch (error) {
+                if (error) {
+                    toast('Não foi possível recuperar a lista de categorias')
+                }
+            }
+        }
+        getCategory()
+    }, [])
 
     async function submit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
         try {
             const post = await postCategory(category)
-            console.log(post)
             toast('Categoria cadastrada com sucesso!')
-        } catch (error) {
-            if (error) {
+            navigate(`/categoria/${post.id}`)
+        } catch (error: any) {
+            if (error && error.response && error.response.status === 409) {
+                toast('Categoria já existente, escolha acima')
+            } else {
                 toast(
                     'Não foi possível cadastrar a categoria, tente novamente mais tarde'
                 )
             }
+        }
+    }
+
+    function handleSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
+        const categoryId = parseInt(event.target.value)
+        if (!isNaN(categoryId)) {
+            navigate(`/categoria/${categoryId}`)
         }
     }
 
@@ -33,14 +62,17 @@ export default function CadastroCategorias() {
                         <h1>Selecione a categoria.</h1>
                     </StyledHeader>
 
-                    <StyledSelect>
+                    <StyledSelect onChange={handleSelectChange}>
                         <option value="" hidden></option>
-                        <option value="teste"> teste</option>
-                        <option value="teste"> teste</option>
-                        <option value="teste"> teste</option>
-                        <option value="teste"> teste</option>
-                        <option value="teste"> teste</option>
+                        {listCategory &&
+                            listCategory.map((category) => (
+                                <option key={category.id} value={category.id}>
+                                    {' '}
+                                    {category.nome}
+                                </option>
+                            ))}
                     </StyledSelect>
+                    <RegisterButton>Ir para Cadastro</RegisterButton>
                 </WrapperInput>
 
                 <WrapperInput>
@@ -76,6 +108,7 @@ const StyledSelect = styled.select`
     height: 30px;
     margin-top: 20px;
     margin-bottom: 40px;
+    font-size: 20px;
 `
 const StyledHeader = styled.div`
     h1 {
@@ -115,4 +148,18 @@ const ContainerForm = styled.div`
         font-size: 30px;
         color: white;
     }
+`
+
+const RegisterButton = styled.button`
+    width: 300px;
+    height: 45px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    border-radius: 10px;
+    border: 1px solid white;
+    background-color: #2c2e43;
+    box-shadow: none;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    color: white;
 `
