@@ -12,6 +12,7 @@ import { useState } from 'react'
 import 'react-toastify/dist/ReactToastify.css'
 import CadastroCategorias from './pages/Cadastro-categorias'
 import CadastroProdutos from './pages/Cadastro-produtos'
+import CadastroMarca from './pages/Cadastro-marca-veiculo'
 
 function App() {
     const [userLogged, setUserLogged] = useState(null)
@@ -41,6 +42,10 @@ function App() {
                             <Route
                                 path="/cadastro-categorias"
                                 element={<CadastroCategorias />}
+                            />
+                            <Route
+                                path="/cadastro-veiculos"
+                                element={<CadastroMarca />}
                             />
                             <Route
                                 path="/categoria/:id"
