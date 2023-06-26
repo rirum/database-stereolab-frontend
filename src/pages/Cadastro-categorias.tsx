@@ -10,6 +10,7 @@ export default function CadastroCategorias() {
     const [category, setCategory] = useState('')
     const [listCategory, setListCategory] = useState<Category[]>([])
     const navigate = useNavigate()
+   
     interface Category {
         id: number
         nome: string
@@ -34,7 +35,7 @@ export default function CadastroCategorias() {
         try {
             const post = await postCategory(category)
             toast('Categoria cadastrada com sucesso!')
-            navigate(`/categoria/${post.id}`)
+            navigate(`/categoria/${post.id}/${post.nome}`)
         } catch (error: any) {
             if (error && error.response && error.response.status === 409) {
                 toast('Categoria já existente, escolha acima')
@@ -48,9 +49,11 @@ export default function CadastroCategorias() {
 
     function handleSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
         const categoryId = parseInt(event.target.value)
-        if (!isNaN(categoryId)) {
-            navigate(`/categoria/${categoryId}`)
-        }
+        const selectedCategory = listCategory.find((category) => category.id === categoryId);
+        if (selectedCategory) {
+      navigate(`/categoria/${selectedCategory.id}/${selectedCategory.nome}`);
+    }
+       
     }
 
     return (
@@ -72,7 +75,7 @@ export default function CadastroCategorias() {
                                 </option>
                             ))}
                     </StyledSelect>
-                    <RegisterButton>Ir para Cadastro</RegisterButton>
+                    <RegisterButton >Ir para Cadastro</RegisterButton>
                 </WrapperInput>
 
                 <WrapperInput>

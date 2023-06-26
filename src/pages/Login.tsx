@@ -48,7 +48,7 @@ export default function Login() {
                     <button>Login</button>
                 </form>
                 <ContainerLink>
-                    <Link to="/cadastro" style={{ textDecoration: 'none' }}>
+                    <Link to="/signup" style={{ textDecoration: 'none' }}>
                         <p>Cadastre-se</p>
                     </Link>
                 </ContainerLink>

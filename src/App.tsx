@@ -43,7 +43,7 @@ function App() {
                                 element={<CadastroCategorias />}
                             />
                             <Route
-                                path="/categoria/:id"
+                                path="/categoria/:id/:nome"
                                 element={<CadastroProdutos />}
                             />
                             <Route path="/*" element={<PageNotFound />} />
