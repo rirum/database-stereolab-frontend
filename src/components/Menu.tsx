@@ -9,10 +9,6 @@ export default function Menu() {
         setActiveItem((prevItem) => (prevItem === item ? '' : item))
     }
 
-    interface MenuItemProps {
-        active: boolean
-    }
-
     return (
         <>
             <OrderedList>
@@ -68,6 +64,9 @@ export default function Menu() {
     )
 }
 
+interface MenuItemProps {
+    active: boolean
+}
 const MenuItem = styled.li<MenuItemProps>`
     font-family: 'Bebas Neue', sans-serif;
     color: #ecdbba;
